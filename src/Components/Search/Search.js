@@ -1,28 +1,35 @@
 import { useState, useEffect } from 'react';
-import './Main.css';
-import WeatherCard from './WeatherCard/WeatherCard';
-import Map from './Map/Map';
+import WeatherCard from '../WeatherCard/WeatherCard';
+import Map from '../Map/Map';
 import Loading from '../Loading/Loading';
 import Axios from 'axios';
 
-const Main = ({apiKey}) => {
+const Search = ({coordinates, ErrorMsgs, apiKey}) => {
+   
     const [data, setData] = useState(null)
-    const [eMsg, setEMsg] = useState(false);
-    const [cityName, setCityName] = useState('Hargeysa')
+    const [eMsg, setEMsg] = useState(ErrorMsgs);
+    const [CheckError, setCheckError] = useState(true);
+    const [base, setBase] = useState(null);
+
+    
 
     useEffect(()=> {
+        if(coordinates !== null){
+        setBase(`lat=${coordinates.latitude}&lon=${coordinates.longitude}`)
+        }
     setTimeout(()=> {
-            Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
+            Axios.get(`https://api.openweathermap.org/data/2.5/weather?${base}&appid=${apiKey}`)
             .then((res)=> {
                setData(res.data);
-            console.log(res.data)
+                console.log(res.data)
             })
             .catch((err) => {
                 setEMsg(err.message);
+                setCheckError(false)
                 return err.message
             })
         },1000);
-    }, [cityName]);
+    }, []);
     
 
     return (
@@ -37,9 +44,8 @@ const Main = ({apiKey}) => {
                             city={data.name} 
                             country={data.sys.country} 
                             coord={data.coord} 
-                            iconId={"https://openweathermap.org/img/w/" +data.weather[0].icon+'.png'}
+                            iconId={data.weather[0].icon} 
                             main={data.weather[0].main} 
-                            temp={data.main.temp}
                             desc={data.weather[0].description}
                             windSpeed={data.wind.speed} 
                             SeaLevel={data.main.sea_level} 
@@ -59,4 +65,4 @@ const Main = ({apiKey}) => {
     );
 }
 
-export default Main;
+export default Serach;

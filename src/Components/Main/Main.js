@@ -8,18 +8,18 @@ import Axios from 'axios';
 const Main = ({apiKey}) => {
     const [data, setData] = useState(null)
     const [eMsg, setEMsg] = useState(false);
-    const [cityName, setCityName] = useState('Hargeysa')
+    const [cityName, setCityName] = useState('Borama')
 
     useEffect(()=> {
     setTimeout(()=> {
             Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
             .then((res)=> {
                setData(res.data);
-            console.log(res.data)
+                console.log(res.data)
             })
             .catch((err) => {
                 setEMsg(err.message);
-                return err.message
+                return;
             })
         },1000);
     }, [cityName]);

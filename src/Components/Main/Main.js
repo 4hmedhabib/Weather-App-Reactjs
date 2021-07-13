@@ -10,7 +10,7 @@ import Axios from 'axios';
 
 
 const Main = ({apiKey}) => {
-    const {city, query} = useParams()
+    const {city} = useParams()
     const [data, setData] = useState(false);
     const [eMsg, setEMsg] = useState(false);
     const [cityName, setCityName] = useState('');
@@ -25,8 +25,8 @@ const Main = ({apiKey}) => {
             })
             .catch(async(err) => {
                await setEMsg(err.message);
-                if(err.message == 'Request failed with status code 404' ){
-                    setEMsg("City Name Spelling isn't correct ("  + cityName + '),' + " Please Try Again ")
+                if(err.message === 'Request failed with status code 404' ){
+                   return setEMsg("City Name Spelling isn't correct ("  + cityName + "), Please Try Again ")
                 }
 
                 return;

@@ -19,7 +19,7 @@ const  App = () =>  {
               <Home />
             </Route>
             <Route path="/:city">
-              <Main apiKey={API_KEY} />
+              <Main apiKey={API_KEY} city={':city'} />
             </Route>
           </Switch>
         </div>

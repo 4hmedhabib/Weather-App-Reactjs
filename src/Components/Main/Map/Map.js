@@ -6,8 +6,8 @@ const Map = ({coord}) => {
 
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng, setLng] = useState(44.0697);
-  const [lat, setLat] = useState(9.565);
+  const [lng, setLng] = useState(null);
+  const [lat, setLat] = useState(null);
   const [zoom, setZoom] = useState(11);
 
     useEffect(() => {

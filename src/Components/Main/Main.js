@@ -4,7 +4,9 @@ import './Main.css';
 import WeatherCard from './WeatherCard/WeatherCard';
 import Map from './Map/Map';
 import Loading from '../Loading/Loading';
+import moment from 'moment'
 import Axios from 'axios';
+
 
 
 const Main = ({apiKey}) => {
@@ -12,7 +14,8 @@ const Main = ({apiKey}) => {
     const [data, setData] = useState(null);
     const [eMsg, setEMsg] = useState(false);
     const [cityName, setCityName] = useState('');
-
+    const date = new Date().toLocaleDateString()
+    
     useEffect(()=> {
     setCityName(city.toLowerCase());
     setTimeout(()=> {
@@ -50,7 +53,9 @@ const Main = ({apiKey}) => {
                             desc={data.weather[0].description}
                             windSpeed={data.wind.speed} 
                             SeaLevel={data.main.sea_level} 
-                            humidity={data.main.humidity} 
+                            humidity={data.main.humidity}
+                            date={moment(date).format('LLLL')}
+                            visibility={data.visibility}
                             />
                         </div>
                         <div className="col-lg-7 col-md-6 col-sm-12 g-2 p-3">
@@ -59,7 +64,7 @@ const Main = ({apiKey}) => {
                         </div>
                 </div>
             </div>
-            : <Loading ErrorMsg={eMsg}/>
+            : <Loading ErrorMsg={eMsg} />
             }
             
         </div>

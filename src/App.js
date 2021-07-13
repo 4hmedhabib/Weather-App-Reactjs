@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 
 const  App = () =>  {
-    const API_KEY = '03d80addf67b4f69569eeae03f49fda8';
+  const API_KEY = '03d80addf67b4f69569eeae03f49fda8';
 
   return (
     <Router>

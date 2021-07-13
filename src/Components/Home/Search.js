@@ -1,9 +1,15 @@
 import {useState} from 'react'
 import { useHistory } from 'react-router-dom';
 
-const Search = ({city}) => {
+const Search = () => {
     const [cityType, setCityType] = useState('');
-    const history = useHistory()
+    const [show, setShow] = useState(false)
+    const history = useHistory();
+
+
+    const handleShow = () => {
+        setShow(!show)
+    }
 
     const handleSumit = (e) => {
         e.preventDefault();
@@ -12,26 +18,21 @@ const Search = ({city}) => {
         history.push(`/${cityType}`)
     }
 
-    console.log('=====', city)
-    
     return (
-        <div className="container-lg my-3 p-5 px-4">
-           {/* <!-- Button trigger modal --> */}
-           <button type="button" className="btn btn-primary col-lg-6" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Search
-            </button>
-
-            {/* <!-- Modal --> */}
-            <div className="modal fade" id="staticBackdrop" >
-            <div className="modal-dialog"> 
-                <div className="modal-content">
-                <div className="modal-header bg-primary text-light">
-                    <h5 className="modal-title" id="staticBackdropLabel">City Search</h5>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div className="container-lg mb-3 p-5 px-4">
+            <div className="col-md-6 offset-md-3 text-center">
+                <h1 className="text-center">Weather Application</h1>
+                <p className="text-center">Powered By: <a className='text-decoration-none' href="https://github.com/ahmedhabiib">Ahmed Habib</a></p>
+            </div>
+            <div className="col-4 offset-4 mb-5">
+                <div className="row">
+                    <button className="btn btn-lg btn-primary d-inline" onClick={handleShow}>Search</button>
                 </div>
-
-                <div className="modal-body py-2">
-                    <form onSubmit={handleSumit} className="my-3">
+            </div>
+          {show ? 
+            <div className="col-md-6 offset-md-3 col-sm-8">
+                <div className="row">
+                <form onSubmit={handleSumit} classNameName="my-3">
                         <input 
                         id="border-radius"
                         className="input-group ps-2 py-2 border-1 border-dark text-decoration-none"
@@ -39,18 +40,17 @@ const Search = ({city}) => {
                         placeholder="Search City..."
                         value={cityType}
                         onChange={(e)=> setCityType(e.target.value)}
-                        />
+                        /> 
+                        <div className="modal-footer">
+                        <button type="submit" className="btn btn-primary">Search</button>
+                    </div>
                     </form>
                 </div>
-                
-                <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-                </div>
             </div>
-            </div>
+            : '' }
         </div>
     );
 }
 
 export default Search;
+

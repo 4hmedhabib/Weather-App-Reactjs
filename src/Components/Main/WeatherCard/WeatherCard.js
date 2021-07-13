@@ -4,7 +4,7 @@ const WeatherCard = (props) => {
         <div>
             {console.log(props.iconId)}
             <div className="card-header mb-3 text-center " id="border-radius">
-                <h5 className="text-muted lead text-dark p-0 m-0">2021 Jul 11 Sunday</h5>
+                <h5 className="text-muted lead text-dark p-0 m-0">{props.date}</h5>
             </div>
             <div id="border-radius" className="card bg-primary  p-3 d-flex flex-wrap flex-row align-items-center justify-content-around">
                 
@@ -37,9 +37,9 @@ const WeatherCard = (props) => {
                     </div>
                     <div className="text-center">
                         <h3 className="text-muted h6">
-                            Sea Level
+                            Visibility
                         </h3>
-                        <p className="card-title h4 fw-bold">{props.SeaLevel / 100} km</p>
+                        <p className="card-title h4 fw-bold">{props.visibility / 1000} km</p>
                     </div>
                 </div>
             </div>

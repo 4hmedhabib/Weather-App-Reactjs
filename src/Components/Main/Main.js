@@ -38,8 +38,10 @@ const Main = ({apiKey}) => {
     return (
         <div className="container-lg my-3 px-4">
             {data  ? <div>
-                <div className="row mb-3">
-                    <Link to='/s/show'  className="btn btn-lg btn-primary d-inline">Search City</Link>
+                <div className="col-md-4 offset-md-4 col-sm-8 offset-sm-2 col-10 offset-1">
+                    <div className="row mb-3">
+                        <Link to='/s/show'  className="btn btn-lg btn-primary d-inline">Search City</Link>
+                    </div>
                 </div>
                 <div className="row text-center mb-3">
                     <h1 className="">{data.name}, {data.sys.country}</h1>

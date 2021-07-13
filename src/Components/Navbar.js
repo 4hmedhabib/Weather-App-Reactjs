@@ -5,7 +5,7 @@ const Navbar = () => {
         <div>
             <nav className="navbar navbar-expand-md navbar-dark bg-dark">
             <div className="container-lg">
-                <a className="navbar-brand" href="/">Navbar</a>
+                <Link className="navbar-brand" to="/">Weather App</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
                     <span className="navbar-toggler-icon"></span>
                 </button>

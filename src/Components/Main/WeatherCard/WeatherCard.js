@@ -22,7 +22,7 @@ const WeatherCard = (props) => {
                         {props.city}, {props.country}
                     </h1>
                     <h1 className="card-title display-1 mb-0">{Math.floor(props.temp - 272.15 )}&deg;c</h1>
-                    <span className="card-text  text-warning ">Degree Celcius</span>
+                    <span className="card-text  text-light ">Degree Celcius</span>
                 </div>
             </div>
             <div className="text-center">

@@ -8,7 +8,6 @@ const Map = ({coord}) => {
   const map = useRef(null);
   const [lng, setLng] = useState(null);
   const [lat, setLat] = useState(null);
-  const [zoom, setZoom] = useState(11);
 
     useEffect(() => {
       if (map.current) return; 
@@ -16,11 +15,9 @@ const Map = ({coord}) => {
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [lng, lat],
-        zoom: zoom
+        zoom: 10
       });
-      console.log(coord);
-      console.log('Running..')
-    }, []);
+    }, [coord, lat, lng]);
 
    if(coord.lon !== lng && coord.lat !== lat){
         setLng(coord.lon);

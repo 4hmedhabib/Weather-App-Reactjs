@@ -13,3 +13,7 @@ code {
     width: auto;
     height: 400px;
 }
+
+button:focus {
+    outline: none;
+}

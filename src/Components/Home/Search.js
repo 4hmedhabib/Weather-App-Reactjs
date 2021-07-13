@@ -1,11 +1,18 @@
-import {useState} from 'react'
-import { useHistory } from 'react-router-dom';
+import {useEffect, useState} from 'react'
+import { useHistory, useParams } from 'react-router-dom';
 
 const Search = () => {
+    const {query} = useParams();
     const [cityType, setCityType] = useState('');
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false) ;
     const history = useHistory();
 
+    useEffect(()=>{
+        if(query === 'show'){
+            setShow(true)
+        }
+        return;
+    }, [query])
 
     const handleShow = () => {
         setShow(!show)
@@ -15,7 +22,7 @@ const Search = () => {
         e.preventDefault();
         console.log('Sumitted')
         setCityType('sumited')
-        history.push(`/${cityType}`)
+        history.push(`/c/${cityType}`)
     }
 
     return (
@@ -24,20 +31,20 @@ const Search = () => {
                 <h1 className="text-center">Weather Application</h1>
                 <p className="text-center">Powered By: <a className='text-decoration-none' href="https://github.com/ahmedhabiib">Ahmed Habib</a></p>
             </div>
-            <div className="col-4 offset-4 mb-5">
+            <div className="col-md-6 offset-md-3 col-sm-12 mb-5">
                 <div className="row">
-                    <button className="btn btn-lg btn-primary d-inline" onClick={handleShow}>Search</button>
+                    <button className="btn btn-lg btn-primary d-block" onClick={handleShow}>Search City</button>
                 </div>
             </div>
           {show ? 
-            <div className="col-md-6 offset-md-3 col-sm-8">
+            <div className="col-md-6 offset-md-3 col-sm-12">
                 <div className="row">
-                <form onSubmit={handleSumit} classNameName="my-3">
+                <form onSubmit={handleSumit} className="my-3">
                         <input 
                         id="border-radius"
-                        className="input-group ps-2 py-2 border-1 border-dark text-decoration-none"
+                        className="form-control"
                         type="text"
-                        placeholder="Search City..."
+                        placeholder="City Name..."
                         value={cityType}
                         onChange={(e)=> setCityType(e.target.value)}
                         /> 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import './Main.css';
 import WeatherCard from './WeatherCard/WeatherCard';
 import Map from './Map/Map';
@@ -10,34 +10,37 @@ import Axios from 'axios';
 
 
 const Main = ({apiKey}) => {
-    const {city} = useParams()
-    const [data, setData] = useState(null);
+    const {city, query} = useParams()
+    const [data, setData] = useState(false);
     const [eMsg, setEMsg] = useState(false);
     const [cityName, setCityName] = useState('');
-    const date = new Date().toLocaleDateString()
+    const date = Date().toLocaleLowerCase()
     
     useEffect(()=> {
     setCityName(city.toLowerCase());
     setTimeout(()=> {
-            Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
-            .then((res)=> {
-               setData(res.data);
-                console.log(res.data)
+         Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
+            .then(async(res)=> {
+                await setData(res.data);
             })
-            .catch((err) => {
-                setEMsg(err.message);
-                if(err.message === 'Request failed with status code 404'){
-                    setEMsg("Can't search this city: " + cityName)
+            .catch(async(err) => {
+               await setEMsg(err.message);
+                if(err.message == 'Request failed with status code 404' ){
+                    setEMsg("City Name Spelling isn't correct ("  + cityName + '),' + " Please Try Again ")
                 }
+
                 return;
             })
-        },3000);
-    }, [cityName]);
-    
+        },100);
+    }, [city, apiKey, cityName]);
+
 
     return (
         <div className="container-lg my-3 px-4">
-            {data !== null ? <div>
+            {data  ? <div>
+                <div className="row mb-3">
+                    <Link to='/s/show'  className="btn btn-lg btn-primary d-inline">Search City</Link>
+                </div>
                 <div className="row text-center mb-3">
                     <h1 className="">{data.name}, {data.sys.country}</h1>
                 </div>
